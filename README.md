@@ -11,4 +11,7 @@ A page where you can see how it works:
 https://todolist-kamilcichon.azurewebsites.net/
 
 
+edit. 1
+Migracja z Lh do nazwa bez ponownego wgrywania aplikacji na chmurę. 
+
 
