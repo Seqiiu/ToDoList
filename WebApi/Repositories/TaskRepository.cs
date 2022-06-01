@@ -43,5 +43,9 @@ namespace WebApi.Repositories
             }
         }
 
+        public IQueryable<TaskModel> GetAll()
+        {
+            return _context.Tasks;
+        }
     }
 }

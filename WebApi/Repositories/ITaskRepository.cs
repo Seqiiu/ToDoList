@@ -7,6 +7,7 @@ namespace WebApi.Repositories
     {
         TaskModel Get(int taskId);
         IQueryable<TaskModel> GetAllActive();
+        IQueryable<TaskModel> GetAll();
         void Add(TaskModel task);
         void Update(int taskid, TaskModel task);
         void Delete(int taskid);
