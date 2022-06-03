@@ -11,14 +11,23 @@ namespace WebApi.Repositories
             _context = context;
         }
         public TaskModel Get(int taskId)
-            => _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
+        {
+            var res = _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
+            res.Status = _context.Statuses.SingleOrDefault(x => x.StatusId ==res.StatusId);
+            res.User2 = _context.User2s.SingleOrDefault(x => x.User2Id == res.User2Id);
+            return res;
+        }
+           
 
         public IQueryable<TaskModel> GetAllActive()
-        => _context.Tasks.Where(x => x.Done == false);
-
+        {
+            var resout = _context.Tasks.Where(x => x.Done == false);
+            return resout;
+        }
         public void Add(TaskModel task)
         {
             _context.Tasks.Add(task);
+            task.StatusId = 1;
             _context.SaveChanges();
         }
         public void Update(int taskId, TaskModel task)
@@ -29,6 +38,8 @@ namespace WebApi.Repositories
                 result.Name = task.Name;
                 result.Description = task.Description;
                 result.Done = task.Done;
+                result.StatusId = task.StatusId;
+                result.User2Id = task.User2Id;
                 _context.SaveChanges();
             }
         }

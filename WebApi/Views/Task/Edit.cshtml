@@ -17,6 +17,14 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <a>Użytkownik </a>
+            <div class="styled-select">
+                @Html.DropDownListFor(model => model.User2Id ,ViewBag.Userlist as MultiSelectList)  
+            </div>
+            <a>Status </a>
+            <div class="styled-select">
+                @Html.DropDownListFor(model => model.StatusId ,ViewBag.StatusList as MultiSelectList)  
+            </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />

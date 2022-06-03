@@ -16,5 +16,11 @@ namespace WebApi.Models
         [Required]
         public string Description { get; set; }
         public bool Done { get; set; }
+        public int ?User2Id { get; set; }
+        [DisplayName("Zadanie dla:")]
+        public virtual User2Model User2 { get; set; }
+        public int ?StatusId { get; set; }
+        [DisplayName("Status")]
+        public virtual StatusModel Status{ get; set; }
     }
 }

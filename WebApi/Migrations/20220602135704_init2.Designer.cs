@@ -2,20 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Repositories;
 
 namespace WebApi.Migrations
 {
     [DbContext(typeof(TaskMenagerContext))]
-    partial class TaskMenagerContextModelSnapshot : ModelSnapshot
+    [Migration("20220602135704_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.17");
+                .HasAnnotation("ProductVersion", "5.0.12");
 
             modelBuilder.Entity("WebApi.Models.StatusModel", b =>
                 {
@@ -49,10 +51,10 @@ namespace WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("StatusId")
+                    b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("User2Id")
+                    b.Property<int>("User2Id")
                         .HasColumnType("int");
 
                     b.HasKey("TaskId");
@@ -73,12 +75,6 @@ namespace WebApi.Migrations
                     b.Property<DateTime>("DateOfCreated")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -92,11 +88,15 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Models.StatusModel", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId");
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WebApi.Models.User2Model", "User2")
                         .WithMany()
-                        .HasForeignKey("User2Id");
+                        .HasForeignKey("User2Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Status");
 

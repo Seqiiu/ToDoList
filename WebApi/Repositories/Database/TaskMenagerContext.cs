@@ -9,6 +9,7 @@ namespace WebApi.Repositories
         {
         }
         public DbSet<TaskModel> Tasks { get; set; }
-
+        public DbSet<User2Model> User2s { get; set; }
+        public DbSet<StatusModel> Statuses { get; set; } 
     }
 }
