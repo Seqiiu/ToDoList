@@ -1,0 +1,38 @@
+﻿@model WebApi.Models.User2Model
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usuwanie użytkownika</h1>
+
+<h3>Czy jesteś pewnien że chcesz usunąć użytkownika? Spowóduje to usunięcie wszystkich zadań, które ma przypisane. Jeżeli chcesz aby zadanie nie były usuniete, zmień najpierw ich właściciela.</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="User2Id" />
+        <input type="submit" value="Usuń użytkownika" class="btn btn-danger"> 
+        <a class="btn btn-dark" asp-action="Index">Wróć do listy użytkowników</a>
+    </form>
+</div>

@@ -19,11 +19,11 @@
             </div>
             <a>Użytkownik </a>
             <div class="styled-select">
-                @Html.DropDownListFor(model => model.User2Id ,ViewBag.Userlist as MultiSelectList)  
+                @Html.DropDownListFor(model => model.User2Id ,ViewBag.Userlist as MultiSelectList,new { @style = "font-size: 26px !important; padding-right: Max-width !important; color: gray !important;"})  
             </div>
             <a>Status </a>
             <div class="styled-select">
-                @Html.DropDownListFor(model => model.StatusId ,ViewBag.StatusList as MultiSelectList)  
+                @Html.DropDownListFor(model => model.StatusId ,ViewBag.StatusList as MultiSelectList,new { @style = "font-size: 26px !important; padding-right: Max-width !important; color: gray !important;"})  
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>

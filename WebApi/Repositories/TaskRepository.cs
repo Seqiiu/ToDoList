@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WebApi.Models;
 
 namespace WebApi.Repositories
@@ -12,16 +13,12 @@ namespace WebApi.Repositories
         }
         public TaskModel Get(int taskId)
         {
-            var res = _context.Tasks.SingleOrDefault(x => x.TaskId == taskId);
-            res.Status = _context.Statuses.SingleOrDefault(x => x.StatusId ==res.StatusId);
-            res.User2 = _context.User2s.SingleOrDefault(x => x.User2Id == res.User2Id);
+            var res =_context.Tasks.Include(x => x.Status).Include(x => x.User2).SingleOrDefault(x => x.TaskId == taskId);
             return res;
         }
-           
-
         public IQueryable<TaskModel> GetAllActive()
         {
-            var resout = _context.Tasks.Where(x => x.Done == false);
+            var resout = _context.Tasks.Include(x => x.Status).Include(x => x.User2).Where(x => x.Done == false);
             return resout;
         }
         public void Add(TaskModel task)
@@ -53,7 +50,6 @@ namespace WebApi.Repositories
                 _context.SaveChanges();
             }
         }
-
         public IQueryable<TaskModel> GetAll()
         {
             return _context.Tasks;

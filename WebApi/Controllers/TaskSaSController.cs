@@ -8,10 +8,10 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/")]
-    public class TackSaSController : ControllerBase
+    public class TaskSaSController : ControllerBase
     {
         private readonly ITaskRepository _repository;
-        public TackSaSController(ITaskRepository repository)
+        public TaskSaSController(ITaskRepository repository)
         {
            _repository = repository;
         }

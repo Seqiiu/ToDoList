@@ -90,7 +90,7 @@ body {
     color: gray !important;
 }
 
-.styled-select select {
+.dropDown {
         font-size: 26px !important;
         padding-right: 195px !important;
         color: gray !important;

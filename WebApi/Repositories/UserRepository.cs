@@ -19,7 +19,8 @@ namespace WebApi.Repositories
         {
             if (user != null && user != default)
             {
-                _context.Add(user);
+                user.DateOfCreated = DateTime.Now;
+                _context.Add(user);             
                 _context.SaveChanges();
             }
         }
@@ -31,7 +32,6 @@ namespace WebApi.Repositories
                 result.Name = user.Name;
                 result.Email = user.Email;
                 result.LastName = user.LastName;
-                result.DateOfCreated = DateTime.Today;
                 _context.SaveChanges();
             }
         }
@@ -40,7 +40,13 @@ namespace WebApi.Repositories
             var resoult = _context.User2s.SingleOrDefault(x => x.User2Id == userid);
             if (resoult != null)
             {
+                var  k = _context.Tasks.Where(x => x.User2Id == userid).ToList();
+                foreach (var item in k)
+                {
+                    _context.Remove(item);
+                }
                 _context.User2s.Remove(resoult);
+
                 _context.SaveChanges();
             }
         }

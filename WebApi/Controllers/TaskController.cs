@@ -22,49 +22,16 @@ namespace WebApi.Controllers
             _userRepository = userRepository;
             _status = status;
         }
-        private List<TaskModel> GetDane()
-        {
-            var user = _userRepository.GetAll();
-            var task = _taskRepository.GetAllActive().ToList();
-            var status = _status.GetAllStatus();
-            for (int i = 0; i < task.Count; i++)
-            {
-                for (int j = 0; j < user.Count; j++)
-                {
-                    if (task[i].User2Id == user[j].User2Id)
-                    {
-                        task[i].User2.Name = user[j].Name;
-                    }
-                }
-                for (int j = 0; j < status.Count; j++)
-                {
-                    if (task[i].StatusId == status[j].StatusId)
-                    {
-                        task[i].Status.Name = status[j].Name;
-                    }
-                }
-            }
-            return task;
-        }
         // GET: Task
-        public ActionResult Index()
-        {
-            return View(GetDane());
-        }
-
+        public ActionResult Index() => View(_taskRepository.GetAllActive().ToList());
         // GET: Task/Details/5
-        public ActionResult Details(int id)
-        {          
-            return View(_taskRepository.Get(id));
-        }
-
+        public ActionResult Details(int id) => View(_taskRepository.Get(id));
         // GET: Task/Create
-        public ActionResult Create()
+        public ActionResult Create() 
         {
             ViewBag.Userlist = GetUsers(null);
             return View(new TaskModel());
         }
-
         // POST: Task/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -72,11 +39,8 @@ namespace WebApi.Controllers
         {
             string k = ViewBag.k;
             _taskRepository.Add(task);
-
             return RedirectToAction(nameof(Index));
-
         }
-
         // GET: Task/Edit/5
         public ActionResult Edit(int id)
         {
@@ -84,7 +48,6 @@ namespace WebApi.Controllers
             ViewBag.StatusList = GetStatus(null);
             return View(_taskRepository.Get(id));
         }
-
         // POST: Task/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -93,12 +56,8 @@ namespace WebApi.Controllers
             _taskRepository.Update(id, taskModel);
             return RedirectToAction(nameof(Index));
         }
-
         // GET: Task/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View(_taskRepository.Get(id));
-        }
+        public ActionResult Delete(int id) => View(_taskRepository.Get(id));
 
         // POST: Task/Delete/5
         [HttpPost]
@@ -118,15 +77,12 @@ namespace WebApi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
+        //Drop down list 
         private MultiSelectList GetUsers(string[] selectedValues)
         {
             var List = _userRepository.GetAll();
             return new MultiSelectList(List, "User2Id", "Name", selectedValues);
-
         }
-
         private MultiSelectList GetStatus(string[] selectedValues)
         {
             var List = _status.GetAllStatus();
