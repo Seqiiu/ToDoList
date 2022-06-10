@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,25 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connetingString = Configuration.GetConnectionString("MySql");
+            //var connetingString = Configuration.GetConnectionString("MySql");
 
 
             services.AddControllersWithViews();
 
-            services.AddDbContext<TaskMenagerContext>(x => x.UseMySQL(connetingString));
+            //  services.AddDbContext<TaskMenagerContext>(x => x.UseMySQL(connetingString));
+            var serverVersion = new MySqlServerVersion(new Version(5, 0, 3));
+
+            services.AddDbContextPool<TaskMenagerContext>(builder =>
+            {
+                builder.UseMySql(
+                    Configuration.GetConnectionString("MySql"), serverVersion,
+                    options =>
+                    {
+                        options.EnableRetryOnFailure();
+                    });
+            });
+
+
 
             services.AddTransient<ITaskRepository, TaskRepository>();
             services.AddTransient<IUserRepository, UserRepository>();

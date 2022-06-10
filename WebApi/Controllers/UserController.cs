@@ -28,10 +28,8 @@ namespace WebApi.Controllers
         public ActionResult Index() => View(_user.GetAll());
         // GET: User/Details/5
         public ActionResult Details(int id) => View(_user.ShowUserById(id));
-
         // GET: User/Edit/5
         public ActionResult Edit(int id) => View(_user.ShowUserById(id));
-
         // POST: User/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -42,7 +40,6 @@ namespace WebApi.Controllers
         }
         // GET: User/Delete/5
         public ActionResult Delete(int id) => View(_user.ShowUserById(id));
-
         // POST: User/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,6 +48,6 @@ namespace WebApi.Controllers
             _user.Delete(id);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }
+

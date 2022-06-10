@@ -13,3 +13,4 @@ namespace WebApi.Repositories
         public DbSet<StatusModel> Statuses { get; set; } 
     }
 }
+

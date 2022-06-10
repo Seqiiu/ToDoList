@@ -16,11 +16,8 @@ namespace WebApi.Repositories
             var res =_context.Tasks.Include(x => x.Status).Include(x => x.User2).SingleOrDefault(x => x.TaskId == taskId);
             return res;
         }
-        public IQueryable<TaskModel> GetAllActive()
-        {
-            var resout = _context.Tasks.Include(x => x.Status).Include(x => x.User2).Where(x => x.Done == false);
-            return resout;
-        }
+        public IQueryable<TaskModel> GetAllActive()=> _context.Tasks.Include(x => x.Status).Include(x => x.User2).Where(x => x.Done == false); 
+        
         public void Add(TaskModel task)
         {
             _context.Tasks.Add(task);

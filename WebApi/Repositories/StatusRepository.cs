@@ -9,7 +9,6 @@ namespace WebApi.Repositories
         private readonly TaskMenagerContext _context;
         public StatusRepository(TaskMenagerContext context)
         {
-
             _context = context;
         }
         public List<StatusModel> GetAllStatus() => _context.Statuses.ToList();
@@ -17,3 +16,6 @@ namespace WebApi.Repositories
 
     }
 }
+
+
+

@@ -76,7 +76,6 @@ namespace WebApi.Controllers
             _taskRepository.Update(id, task);
             return RedirectToAction(nameof(Index));
         }
-
         //Drop down list 
         private MultiSelectList GetUsers(string[] selectedValues)
         {
